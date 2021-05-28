@@ -1,0 +1,5 @@
+<h2>The list of blocked users</h2>
+<ul *ngIf="blockedUsers.length > 0">
+  <li *ngFor="let user of blockedUsers">{{user.name}} <button mat-button [color]="'primary'" (click)="unblockUser(user.email)">Unblock</button></li>
+</ul>
+<div *ngIf="blockedUsers.length === 0">There are no blocked users!</div>

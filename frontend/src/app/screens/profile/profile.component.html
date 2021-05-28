@@ -1,0 +1,111 @@
+<mat-card *ngIf="currentUser" class="page-card mat-elevation-z2">
+  <mat-card-header><h1>Profile</h1></mat-card-header>
+        <img *ngIf="user" src="{{user.picture}}" class="picture rounded-circle">
+        <form class="form-container" [formGroup]="profileForm">
+          <mat-form-field appearance="standard">
+            <mat-label>First name</mat-label>
+            <input matInput type="text" placeholder="Please provide your first name" formControlName="first_name">
+            <mat-error *ngIf="firstnameControl.hasError('required')">
+              <strong>First name is required!</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Lastname</mat-label>
+            <input matInput type="text" placeholder="Please provide your lastname" formControlName="last_name">
+            <mat-error *ngIf="lastnameControl.hasError('required')">
+              <strong>Last name is required!</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" placeholder="Please provide your email address" formControlName="email" readonly>
+            <mat-error *ngIf="emailControl.hasError('required')">
+              <strong>Email is required!</strong>
+            </mat-error>
+            <mat-error *ngIf="emailControl.hasError('email')">
+              <strong>Please provide correct email address!</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="standard">
+            <mat-label>Postcode</mat-label>
+            <input matInput type="text" placeholder="Postcode" formControlName="location">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>I'm interested in dating</mat-label>
+            <mat-select multiple formControlName="interest">
+              <mat-option [value]="'male'">
+                Male
+              </mat-option>
+              <mat-option [value]="'female'">
+                Female
+              </mat-option>
+              <mat-option [value]="'trans'">
+                Transgender
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option [value]="'male'">
+                Male
+              </mat-option>
+              <mat-option [value]="'female'">
+                Female
+              </mat-option>
+              <mat-option [value]="'trans'">
+                Transgender
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>About me</mat-label>
+            <textarea matInput placeholder="E.g., I love singing and sleeping" formControlName="about"></textarea>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Interests</mat-label>
+            <mat-chip-list #chipList aria-label="Interests section">
+              <mat-chip *ngFor="let interest of interests" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(interest)">
+                {{interest}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Add some interests..."
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+            <mat-file-upload
+              [labelText]="'Please select a photo if you wish to change it'"
+              [selectButtonText]="'Choose photo...'"
+              [selectFilesButtonType]="'button'"
+              [allowMultipleFiles]="false"
+              [showUploadButton]="false"
+              [acceptedTypes]="'.png, .jpg, .jpeg'"
+              (selectedFilesChanged)="onSelectedFilesChanged($event)"
+            >
+            </mat-file-upload>
+          <div class="btn-container full-width">
+            <button mat-raised-button color="primary" (click)="submitForm(profileForm.value)">Update</button><br>
+          </div>
+          <p class="full-width">
+            You can choose a friend and go double dates<br>
+            <button mat-raised-button color="accent" (click)="buddyUp()" class="action-button">Buddy up</button>
+          </p>
+          <div class="full-width">
+            <button mat-raised-button color="accent" (click)="blockedUsers()" class="action-button">Show blocked users</button>
+            <button mat-raised-button color="warn" (click)="disableAccount()" class="action-button" *ngIf="!userDisabled">Disable account</button>
+            <button mat-raised-button color="warn" (click)="enableAccount()" class="action-button" *ngIf="userDisabled">Enable account</button>
+          </div>
+        </form>
+
+
+</mat-card>

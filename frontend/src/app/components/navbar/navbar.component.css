@@ -1,0 +1,18 @@
+.navbar {
+  padding: 1rem 20vw;
+  background: #845ec2!important;
+}
+
+.navbar-collapse {
+  justify-content: space-evenly;
+}
+
+.nav-item {
+  margin: 0 2rem;
+}
+
+.nav-link {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}

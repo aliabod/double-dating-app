@@ -1,0 +1,38 @@
+<div *ngIf="!buddyUpID">
+  <h1 *ngIf="buddyUpRequests.length > 0">Buddy up requests</h1>
+  <b *ngFor="let req of buddyUpRequests">
+    <div class="buddy-name">
+      {{req.name}} ({{req.request.requestedBy}})
+      <button mat-mini-fab color="primary" (click)="acceptBuddy(req.request.requestedBy)">
+        <mat-icon>done</mat-icon>
+      </button>
+    </div>
+    <br>
+  </b>
+  <h1 *ngIf="buddyUpsRequested.length > 0">Buddy up requested</h1>
+  <b *ngFor="let req of buddyUpsRequested">
+    <div class="buddy-name">
+      {{req.name}} ({{req.email}})
+      <button mat-mini-fab color="primary" (click)="cancelRequest(req.request._id)">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <br>
+  </b>
+</div>
+<div *ngIf="buddyUpID" class="text-center">
+  <button mat-raised-button color="primary" (click)="cancelBuddy(buddyUpID)">Cancel buddy up with {{buddyName}}</button><br>
+</div>
+
+<form class="form-container full-width" [formGroup]="profileForm" *ngIf="!buddyUpID">
+  <mat-form-field appearance="standard" class="full-width">
+    <mat-label>Buddy's email:</mat-label>
+    <input matInput type="email" placeholder="Please provide your buddy's email address" formControlName="buddyEmail">
+    <mat-error *ngIf="buddyEmailControl.hasError('email')">
+      <strong>Please provide correct email address!</strong>
+    </mat-error>
+  </mat-form-field>
+  <div class="btn-container full-width">
+    <button mat-raised-button color="primary" (click)="submitForm(profileForm.value)">Update</button><br>
+  </div>
+</form>

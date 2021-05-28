@@ -1,0 +1,13 @@
+.full-width {
+  min-width: 100%;
+}
+
+.buddy-name {
+  font-size: 1rem;
+  padding: 0.25rem;
+  display: inline-block;
+}
+
+.buddy-name button {
+  margin-left: 2rem;
+}

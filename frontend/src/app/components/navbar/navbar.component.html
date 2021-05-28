@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><img src="/assets/img/bg.png" alt="Dating app logo" class="logo-nav"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item" *ngIf="displayLogin">
+        <a class="nav-link" (click)="loginDialog()">Sign in</a>
+      </li>
+      <li class="nav-item" *ngIf="displayLogin">
+        <button mat-stroked-button class="mat-button nav-link" (click)="signupDialog()">Sign up</button>
+      </li>
+      <li class="nav-item" *ngIf="!displayLogin">
+        <a class="nav-link" routerLink="/explore">Explore</a>
+      </li>
+      <li class="nav-item" *ngIf="!displayLogin && displayBuddy">
+        <a class="nav-link" routerLink="/exploreBuddies">Explore buddies</a>
+      </li>
+      <li class="nav-item" *ngIf="!displayLogin && screenIndex < 2">
+        <a class="nav-link" routerLink="/messages">Messages</a>
+      </li>
+      <li class="nav-item" *ngIf="!displayLogin">
+        <a class="nav-link" routerLink="/profile">My profile</a>
+      </li>
+      <li class="nav-item" *ngIf="!displayLogin">
+        <button mat-stroked-button class="mat-button nav-link" (click)="logout()">Logout</button>
+      </li>
+
+    </ul>
+  </div>
+</nav>

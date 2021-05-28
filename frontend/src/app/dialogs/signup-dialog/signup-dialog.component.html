@@ -1,0 +1,90 @@
+<div class="section">
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+      <img src="/assets/img/bg.png" alt="Dating page logo" class="logo-250"><br>
+      <form class="form-container" [formGroup]="signupForm" *ngIf="!userRegistered">
+        <mat-form-field appearance="standard">
+          <mat-label>First name</mat-label>
+          <input matInput type="text" placeholder="Please provide your first name" formControlName="first_name">
+          <mat-error *ngIf="firstnameControl.hasError('required')">
+            <strong>First name is required!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Lastname</mat-label>
+          <input matInput type="text" placeholder="Please provide your lastname" formControlName="last_name">
+          <mat-error *ngIf="lastnameControl.hasError('required')">
+            <strong>Last name is required!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" placeholder="Please provide your email address" formControlName="email">
+          <mat-error *ngIf="emailControl.hasError('required')">
+            <strong>Email is required!</strong>
+          </mat-error>
+          <mat-error *ngIf="emailControl.hasError('email')">
+            <strong>Please provide correct email address!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Please provide your password" formControlName="password">
+          <mat-error *ngIf="passwordControl.hasError('required')">
+            <strong>Password is required!</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordControl.hasError('minlength')">
+            <strong>Password must be at least 5 characters long!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Repeat password</mat-label>
+          <input matInput type="password" placeholder="Please repeat the password" formControlName="password2">
+          <mat-error *ngIf="password2Control.hasError('required')">
+            <strong>Repeat password is required!</strong>
+          </mat-error>
+          <mat-error *ngIf="password2Control.hasError('minlength')">
+            <strong>Password must be at least 5 characters long!</strong>
+          </mat-error>
+          <mat-error *ngIf="signupForm.hasError('notSame')">
+            <strong>Passwords do not match!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-file-upload
+          [labelText]="'Please upload the photo:'"
+          [selectButtonText]="'Choose photo...'"
+          [selectFilesButtonType]="'button'"
+          [allowMultipleFiles]="false"
+          [showUploadButton]="false"
+          [acceptedTypes]="'.png, .jpg, .jpeg'"
+          (selectedFilesChanged)="onSelectedFilesChanged($event)"
+        >
+        </mat-file-upload>
+        <div *ngIf="pictureError">
+          <div class="mat-error">
+            <strong>You need to upload the picture!</strong>
+          </div>
+        </div>
+
+        <div *ngIf="passwordError">
+          <div class="mat-error">
+            <strong>Passwords provided do not match!</strong>
+          </div>
+        </div>
+
+        <div *ngIf="registerError">
+          <div class="mat-error">
+            <strong>User with this email already exists!</strong>
+          </div>
+          <p>Do you want to <a (click)="loginDialog()" mat-dialog-close>login</a>?</p>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="submitForm(signupForm.value)">Sign up</button>
+      </form>
+      <div *ngIf="userRegistered">
+        <h3>User has been registered!</h3>
+        <p>Do you want to <a (click)="loginDialog()" mat-dialog-close>login</a>?</p>
+      </div>
+    </div>
+  </div>
+</div>

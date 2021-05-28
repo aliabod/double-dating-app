@@ -1,0 +1,119 @@
+.page-card {
+  min-height: 100%;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.people-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 100%;
+  flex-wrap: wrap;
+  height: 100%;
+  overflow: auto;
+}
+
+.person-picture {
+  object-fit: cover;
+  height: 15rem;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button-container button {
+  margin: 1rem;
+}
+
+.people {
+  height: 60vh;
+}
+
+.slider-container{
+  width: 45%;
+}
+
+
+.like {
+  color: green;
+  transition: 0.5s;
+}
+
+.like:hover {
+  background: green;
+  color: white;
+}
+
+.dislike {
+  color: red;
+  transition: 0.5s;
+}
+
+.dislike:hover {
+  background: red;
+  color: white;
+}
+
+.superlike {
+  background: #845ec2;
+  color: white;
+  transition: 0.5s;
+}
+
+.superlike:hover {
+  background: white;
+  color: #845ec2;
+}
+
+.common-interest {
+  background: #5FF585;
+}
+
+.person-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 1600px) {
+  .person-card {
+    margin: 1rem;
+    width: calc(25% - 2rem);
+    max-height: 50vh;
+  }
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1599px) {
+  .person-card {
+    margin: 1rem;
+    width: calc(50% - 2rem);
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .person-card {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+
+  .slider-container{
+    width: 95%;
+    margin: 1rem;
+  }
+
+  .options-container {
+    flex-direction: column;
+  }
+}

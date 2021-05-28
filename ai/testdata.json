@@ -1,0 +1,29 @@
+{
+  "status": "OK",
+  "msg": [
+    {
+      "email": "1@test.com",
+      "score": 10.384615384615385
+    },
+    {
+      "email": "2@test.com",
+      "score": 10.384615384615385
+    },
+    {
+      "email": "abcde@abcde.com",
+      "score": 9.615384615384617
+    },
+    {
+      "email": "3@test.com",
+      "score": 8.846153846153847
+    },
+    {
+      "email": "test4@test4.com",
+      "score": 6.634615384615385
+    },
+    {
+      "email": "test@test.com",
+      "score": 5.096153846153847
+    }
+  ]
+}

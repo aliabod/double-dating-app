@@ -1,0 +1,76 @@
+<mat-card class="page-card mat-elevation-z2">
+  <mat-card-header><h1>Nearby</h1></mat-card-header>
+  <mat-card-content>
+
+    <h2 *ngIf="error" class="mat-error text-center">You need to complete your profile before exploring!</h2>
+    <h2 *ngIf="isDisabled" class="mat-error text-center">Your account is currently disabled, please enable it in My
+      profile if you want to discover new people!</h2>
+
+    <div class="options-container" *ngIf="(!error) && (!isDisabled)">
+      <div class="slider-container">
+        <h2>Age</h2>
+        <ngx-slider [(value)]="valueAge" [(highValue)]="highValueAge" [options]="optionsAge"
+                    (userChange)="ageFilter($event)" (userChangeEnd)="onFilterChange()"></ngx-slider>
+      </div>
+      <div class="slider-container">
+        <h2>Distance</h2>
+        <ngx-slider [(value)]="valueDistance" [options]="optionsDistance" (userChange)="distanceFilter($event)"
+                    (userChangeEnd)="onFilterChange()"></ngx-slider>
+      </div>
+
+    </div>
+    <div class="people" *ngIf="(!error) && (!isDisabled)">
+      <div class="people-container" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50"
+           [scrollWindow]="false" (scrolled)="onScroll()" #peopleContainer>
+        <mat-card class="buddy-card" *ngFor="let person of people">
+          <div class="buddy-container">
+            <mat-card class="person-card">
+              <div>
+                <mat-card-header>
+                  <mat-card-title>{{person.user1.first_name}}</mat-card-title>
+                  <mat-card-subtitle>{{person.user1.age}} yo</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{person.user1.picture}}" alt="Photo of {{person.user1.first_name}}" class="person-picture">
+                <mat-card-content>
+                  <p>
+                    {{person.user1.about}}
+                  </p>
+                </mat-card-content>
+              </div>
+            </mat-card>
+            <mat-card class="person-card">
+              <div>
+                <mat-card-header>
+                  <mat-card-title>{{person.user2.first_name}}</mat-card-title>
+                  <mat-card-subtitle>{{person.user2.age}} yo</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="{{person.user2.picture}}" alt="Photo of {{person.user2.first_name}}" class="person-picture">
+                <mat-card-content>
+                  <p>
+                    {{person.user2.about}}
+                  </p>
+                </mat-card-content>
+              </div>
+            </mat-card>
+          </div>
+          <mat-card-actions class="button-container">
+            <button mat-fab color="basic" class="dislike" aria-label="Example icon button with a home icon"
+                    (click)="dislike(person.buddyId)">
+              <mat-icon>close</mat-icon>
+            </button>
+            <button mat-fab color="basic" class="superlike" aria-label="Example icon button with a home icon"
+                    (click)="superlike(person.buddyId)">
+              <mat-icon>grade</mat-icon>
+            </button>
+            <button mat-fab color="basic" class="like" aria-label="Example icon button with a home icon"
+                    (click)="like(person.buddyId)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+    </div>
+
+  </mat-card-content>
+</mat-card>

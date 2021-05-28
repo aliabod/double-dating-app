@@ -1,0 +1,46 @@
+<mat-card class="page-card mat-elevation-z2">
+  <mat-card-content>
+    <mat-progress-bar mode="indeterminate" *ngIf="messagesLoading$ | async"></mat-progress-bar>
+    <div class="message-container" *ngIf="!(messagesLoading$ | async)">
+      <div *ngIf="newMatches">
+        <h2 class="text-center">New matches</h2>
+        <mat-card class="message mat-elevation-z1" *ngFor="let match of matches" (click)="openMessage(match)">
+          <img src="{{match.picture}}" alt="John's picture" class="rounded-circle">
+          <div class="message-section">
+            <mat-card-title>{{match.name}}</mat-card-title>
+            <mat-card-subtitle>{{match.message}}</mat-card-subtitle>
+          </div>
+        </mat-card>
+      </div>
+
+      <div *ngIf="newBuddyMatches">
+        <h2 class="text-center">New buddy matches</h2>
+        <mat-card class="message mat-elevation-z1" *ngFor="let match of buddyMatches" (click)="openBuddyMessage(match)">
+          <img src="{{match.users[0].picture}}" alt="John's picture" class="rounded-circle">
+          <div class="message-section">
+            <mat-card-title>{{match.users[0].first_name}} & {{match.users[1].first_name}}</mat-card-title>
+            <mat-card-subtitle>{{match.message}}</mat-card-subtitle>
+          </div>
+        </mat-card>
+      </div>
+
+      <h2 class="text-center">Messages</h2>
+      <mat-card class="message mat-elevation-z1" *ngFor="let message of messages" (click)="openMessage(message)">
+        <img src="{{message.picture}}" alt="John's picture" class="rounded-circle">
+        <div class="message-section">
+          <mat-card-title>{{message.name}}</mat-card-title>
+          <mat-card-subtitle>{{message.message | slice: 0:100}}</mat-card-subtitle>
+        </div>
+      </mat-card>
+
+      <h2 class="text-center">Buddy Messages</h2>
+      <mat-card class="message mat-elevation-z1" *ngFor="let message of buddyMessages" (click)="openBuddyMessage(message)">
+        <img src="{{message.users[0].picture}}" alt="John's picture" class="rounded-circle">
+        <div class="message-section">
+          <mat-card-title>{{message.users[0].first_name}} & {{message.users[1].first_name}}</mat-card-title>
+          <mat-card-subtitle>{{message.message}}</mat-card-subtitle>
+        </div>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,43 @@
+<mat-card class="page-card mat-elevation-z2">
+  <mat-card-header><h1>Home</h1></mat-card-header>
+  <div *ngIf="authenticated" class="recommendation">
+    <h2 *ngIf="isDisabled" class="mat-error text-center">Your account is currently disabled, please enable it in My profile if you want to discover new people!</h2>
+    <mat-card class="person-card" *ngIf="userFetched && !isDisabled">
+      <mat-card-header>
+        <mat-card-title>{{person.first_name}}</mat-card-title>
+        <mat-card-subtitle>{{person.age}} yo</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{person.picture}}" alt="Photo of {{person.first_name}}" class="person-picture">
+      <mat-card-content>
+        <p>
+          {{person.about}}
+        </p>
+        <mat-chip-list>
+          <mat-chip *ngFor="let interest of interests.common" class="common-interest">
+            {{interest}}
+          </mat-chip>
+          <mat-chip *ngFor="let interest of interests.notCommon">
+            {{interest}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions class="button-container">
+        <button mat-fab color="basic" class="dislike" aria-label="Example icon button with a home icon" (click)="dislike(person.email)">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-fab color="basic" class="superlike" aria-label="Example icon button with a home icon" (click)="superlike(person.email)">
+          <mat-icon>grade</mat-icon>
+        </button>
+        <button mat-fab color="basic" class="like" aria-label="Example icon button with a home icon" (click)="like(person.email)">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div *ngIf="!hasRecommendations">
+      <h1>You need to like more people to see your recommendations!</h1>
+    </div>
+  </div>
+  <div *ngIf="!authenticated">
+    When logged out
+  </div>
+</mat-card>

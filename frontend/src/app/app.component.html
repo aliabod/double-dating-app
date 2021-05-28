@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="full-content" *ngIf="authenticated">
+  <div class="messages scrollable-content" *ngIf="screenIndex === 2">
+    <app-messages></app-messages>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="full-page-non-authenticated" *ngIf="!authenticated">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

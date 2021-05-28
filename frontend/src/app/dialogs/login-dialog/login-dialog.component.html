@@ -1,0 +1,34 @@
+<div class="section">
+  <div class="row">
+    <div class="col-md-6 ml-auto mr-auto text-center">
+      <img src="/assets/img/bg.png" class="logo-250"><br>
+      <form class="form-container" [formGroup]="loginForm" *ngIf="!userAuthenticated">
+        <mat-form-field appearance="standard">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" placeholder="Please provide your email address" formControlName="email">
+          <mat-error *ngIf="emailControl.hasError('required')">
+            <strong>Email is required!</strong>
+          </mat-error>
+          <mat-error *ngIf="emailControl.hasError('email')">
+            <strong>Please provide correct email address!</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Please provide your password" formControlName="password">
+          <mat-error *ngIf="passwordControl.hasError('required')">
+            <strong>Password is required!</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordControl.hasError('minlength')">
+            <strong>Password must be at least 5 characters long!</strong>
+          </mat-error>
+        </mat-form-field>
+        <div *ngIf="loginError" class="mat-error">
+          <strong>Wrong credentials!</strong>
+        </div>
+        <button mat-raised-button color="primary" (click)="submitForm(loginForm.value)">Sign in</button><br>
+      </form>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,73 @@
+.page-card {
+  min-height: 100%;
+}
+
+.recommendation {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.person-picture {
+  object-fit: cover;
+  height: 50vh;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.button-container button {
+  margin: 1rem;
+}
+
+.person-card {
+  width: 60%;
+}
+
+.like {
+  color: green;
+  transition: 0.5s;
+}
+
+.like:hover {
+  background: green;
+  color: white;
+}
+
+.dislike {
+  color: red;
+  transition: 0.5s;
+}
+
+.dislike:hover {
+  background: red;
+  color: white;
+}
+
+.superlike {
+  background: #845ec2;
+  color: white;
+  transition: 0.5s;
+}
+
+.superlike:hover {
+  background: white;
+  color: #845ec2;
+}
+
+.common-interest {
+  background: #5FF585;
+}
+
+@media screen and (max-width: 999px) {
+  .person-card {
+    width: calc(100%);
+  }
+}

@@ -1,0 +1,59 @@
+<mat-card class="page-card mat-elevation-z2">
+  <mat-card-header><h1>Nearby</h1></mat-card-header>
+  <mat-card-content>
+
+    <h2 *ngIf="error" class="mat-error text-center">You need to complete your profile before exploring!</h2>
+    <h2 *ngIf="isDisabled" class="mat-error text-center">Your account is currently disabled, please enable it in My profile if you want to discover new people!</h2>
+
+    <div class="options-container" *ngIf="(!error) && (!isDisabled)">
+      <div class="slider-container">
+        <h2>Age</h2>
+        <ngx-slider [(value)]="valueAge" [(highValue)]="highValueAge" [options]="optionsAge" (userChange)="ageFilter($event)" (userChangeEnd)="onFilterChange()"></ngx-slider>
+      </div>
+      <div class="slider-container">
+        <h2>Distance</h2>
+        <ngx-slider [(value)]="valueDistance" [options]="optionsDistance" (userChange)="distanceFilter($event)" (userChangeEnd)="onFilterChange()"></ngx-slider>
+      </div>
+
+    </div>
+    <div class="people" *ngIf="(!error) && (!isDisabled)">
+      <div class="people-container" infiniteScroll [infiniteScrollDistance]="3" [infiniteScrollThrottle]="50" [scrollWindow]="false" (scrolled)="onScroll()" #peopleContainer>
+        <mat-card class="person-card" *ngFor="let person of people">
+          <div>
+            <mat-card-header>
+              <mat-card-title>{{person.first_name}}</mat-card-title>
+              <mat-card-subtitle>{{person.age}} yo</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="{{person.picture}}" alt="Photo of {{person.first_name}}" class="person-picture">
+            <mat-card-content>
+              <p>
+                {{person.about}}
+              </p>
+              <mat-chip-list *ngIf="person.interests">
+                <mat-chip *ngFor="let interest of person.interests.common" class="common-interest">
+                  {{interest}}
+                </mat-chip>
+                <mat-chip *ngFor="let interest of person.interests.notCommon">
+                  {{interest}}
+                </mat-chip>
+              </mat-chip-list>
+            </mat-card-content>
+          </div>
+          <mat-card-actions class="button-container">
+            <button mat-fab color="basic" class="dislike" aria-label="Example icon button with a home icon" (click)="dislike(person.email)">
+              <mat-icon>close</mat-icon>
+            </button>
+            <button mat-fab color="basic" class="superlike" aria-label="Example icon button with a home icon" (click)="superlike(person.email)">
+              <mat-icon>grade</mat-icon>
+            </button>
+            <button mat-fab color="basic" class="like" aria-label="Example icon button with a home icon" (click)="like(person.email)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+    </div>
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,36 @@
+<h1 class="message-title">{{messageData.content.name}} <button mat-button [color]="'primary'" (click)="blockUser(messageData.content.email)" mat-dialog-close>Block buddy</button></h1>
+<mat-card class="messages-card mat-elevation-z0">
+  <mat-card-content>
+    <div class="message-container" #messageContainer>
+      <div class="message" *ngFor="let message of messages">
+
+        <div *ngIf="message.sender === 0">
+          <div class="message-section">
+            <span class="msg left"><img src="{{message.senderPicture}}" class="rounded-circle profile-picture" alt="{{messageData.content.name}}'s picture">{{message.content}}</span>
+          </div>
+        </div>
+
+        <div *ngIf="message.sender === 1 && message.buddySender">
+          <div class="message-section">
+            <div class="msg right green">{{message.content}}<img src="{{message.senderPicture}}" class="rounded-circle profile-picture" alt="{{messageData.content.name}}'s picture"></div>
+          </div>
+        </div>
+
+        <div *ngIf="message.sender === 1 && !message.buddySender">
+          <div class="message-section">
+            <div class="msg right">{{message.content}}<img src="{{message.senderPicture}}" class="rounded-circle profile-picture" alt="{{messageData.content.name}}'s picture"></div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<form class="form-container" [formGroup]="messageForm">
+  <mat-form-field appearance="standard">
+    <mat-label>Your message</mat-label>
+    <textarea matInput type="text" placeholder="Message..." formControlName="message"></textarea>
+  </mat-form-field>
+  <button mat-raised-button [color]="'primary'" (click)="submitForm(messageForm.value)">Send</button>
+</form>
+
